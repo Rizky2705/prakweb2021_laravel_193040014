@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\PostController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,60 +36,7 @@ Route::get('/about', function () {
 
 
 
-Route::get('/blog', function () {
-
-    $blog_posts = [
-        [
-        "title" => "Judul Post Pertama",
-        "slug" => "judul-post-pertama",
-        "author" => "Hanif",
-        "body" => "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam excepturi aspernatur fugiat eaque harum ex magni, laudantium neque quidem iure, voluptatum mollitia repudiandae reprehenderit adipisci dolores aut voluptate reiciendis repellat! Est saepe quidem provident in eaque reiciendis, harum repellendus possimus enim delectus ex? Et deserunt molestiae quod dignissimos. Molestiae ipsum, dolore animi esse dicta et explicabo ullam error minima, neque ab quisquam incidunt, enim quae laboriosam omnis quam vero perferendis illum eius. Debitis nemo aperiam distinctio quidem sit cumque ipsam."
-        ],
-        [
-            "title" => "Judul Post Kedua",
-            "slug" => "judul-post-kedua",
-            "author" => "Muhamad Rizky Fauzan",
-            "body" => "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam excepturi aspernatur fugiat eaque harum ex magni, laudantium neque quidem iure, voluptatum mollitia repudiandae reprehenderit adipisci dolores aut voluptate reiciendis repellat! Est saepe quidem provident in eaque reiciendis, harum repellendus possimus enim delectus ex? Et deserunt molestiae quod dignissimos. Molestiae ipsum, dolore animi esse dicta et explicabo ullam error minima, neque ab quisquam incidunt, enim quae laboriosam omnis quam vero perferendis illum eius. Debitis nemo aperiam distinctio quidem sit cumque ipsam, Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam excepturi aspernatur fugiat eaque harum ex magni, laudantium neque quidem iure, voluptatum mollitia repudiandae reprehenderit adipisci dolores aut voluptate reiciendis repellat! Est saepe quidem provident in eaque reiciendis, harum repellendus possimus enim delectus ex? Et deserunt molestiae quod dignissimos. Molestiae ipsum, dolore animi esse dicta et explicabo ullam error minima, neque ab quisquam incidunt, enim quae laboriosam omnis quam vero perferendis illum eius. Debitis nemo aperiam distinctio quidem sit cumque ipsam."
-            ],
-    
-    ];
-
-    return view('posts', [
-        "title" => "Posts",
-        "posts" => $blog_posts
-    ]);
-});
+Route::get('/blog', [PostController::class, 'index']);
 
 
-// halaman single post
-
-Route::get('posts/{slug}', function($slug){
-
-    $blog_posts = [
-        [
-        "title" => "Judul Post Pertama",
-        "slug" => "judul-post-pertama",
-        "author" => "Hanif",
-        "body" => "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam excepturi aspernatur fugiat eaque harum ex magni, laudantium neque quidem iure, voluptatum mollitia repudiandae reprehenderit adipisci dolores aut voluptate reiciendis repellat! Est saepe quidem provident in eaque reiciendis, harum repellendus possimus enim delectus ex? Et deserunt molestiae quod dignissimos. Molestiae ipsum, dolore animi esse dicta et explicabo ullam error minima, neque ab quisquam incidunt, enim quae laboriosam omnis quam vero perferendis illum eius. Debitis nemo aperiam distinctio quidem sit cumque ipsam."
-        ],
-        [
-            "title" => "Judul Post Kedua",
-            "slug" => "judul-post-kedua",
-            "author" => "Muhamad Rizky Fauzan",
-            "body" => "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam excepturi aspernatur fugiat eaque harum ex magni, laudantium neque quidem iure, voluptatum mollitia repudiandae reprehenderit adipisci dolores aut voluptate reiciendis repellat! Est saepe quidem provident in eaque reiciendis, harum repellendus possimus enim delectus ex? Et deserunt molestiae quod dignissimos. Molestiae ipsum, dolore animi esse dicta et explicabo ullam error minima, neque ab quisquam incidunt, enim quae laboriosam omnis quam vero perferendis illum eius. Debitis nemo aperiam distinctio quidem sit cumque ipsam, Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam excepturi aspernatur fugiat eaque harum ex magni, laudantium neque quidem iure, voluptatum mollitia repudiandae reprehenderit adipisci dolores aut voluptate reiciendis repellat! Est saepe quidem provident in eaque reiciendis, harum repellendus possimus enim delectus ex? Et deserunt molestiae quod dignissimos. Molestiae ipsum, dolore animi esse dicta et explicabo ullam error minima, neque ab quisquam incidunt, enim quae laboriosam omnis quam vero perferendis illum eius. Debitis nemo aperiam distinctio quidem sit cumque ipsam."
-            ],
-    
-    ];
-
-    $new_post = [];
-    foreach($blog_posts as $post){
-        if($post["slug"] == $slug){
-            $new_post = $post;
-        }
-    }
-
-    return view ('post',[
-        "title" => "Single Post",
-        "post" => $new_post
-    ]);
-});
+Route::get('posts/{slug}', [PostController::class, 'show']);
